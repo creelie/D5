@@ -2,7 +2,8 @@
 # Runs every check of the archive.
 #   ./run_all.sh          the four independent checkers (C, C++, Julia, Python) on cert/certificate.txt,
 #                         two from-scratch enumerations of the extreme rays (C, Julia), the cdd/lrs
-#                         comparison, the equality classification, and the Lean build
+#                         comparison, the equality classification, the checks of the five extremal
+#                         configurations, and the Lean build
 #   ./run_all.sh --full   also recomputes the enumeration and the certificate and compares them with the
 #                         files in data/ and cert/
 set -euo pipefail
@@ -50,6 +51,9 @@ cmp <(python3 -c "import json,sys; print(json.dumps(json.load(open(sys.argv[1]))
 cmp <(python3 -c "import json,sys; print(json.dumps(json.load(open(sys.argv[1])), sort_keys=True))" "$WORK/optimal_classes.json") \
     <(python3 -c "import json,sys; print(json.dumps(json.load(open(sys.argv[1])), sort_keys=True))" "$ROOT/data/optimal_classes.json")
 (cd "$ROOT/compute" && python3 lattice_check.py "$ROOT/data/optimal_classes.json")
+
+step "the five configurations of the paper (Section 6)"
+python3 -I "$ROOT/compute/configurations.py" "$ROOT/data/equality_points.json"
 
 if [ "$FULL" = 1 ]; then
   step "recompute the enumeration and the certificate"
