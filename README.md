@@ -72,6 +72,11 @@ extreme, the completeness of the ray lists and the orbit decompositions are
 checked by the programs, not in Lean; the reduction and the equality case are
 proved by hand in the paper.
 
+## Archive
+
+Zenodo, all versions: [10.5281/zenodo.23323366](https://doi.org/10.5281/zenodo.23323366);
+release v1.0.0: [10.5281/zenodo.23323367](https://doi.org/10.5281/zenodo.23323367).
+
 ## License
 
 MIT (see `LICENSE`).
