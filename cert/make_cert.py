@@ -13,8 +13,8 @@ Format (one record per line, integers and rationals p/q separated by spaces):
   END
   EQUALITY e   followed by e lines  P vertex idx t   (idx = -1 for the vertex itself)
 """
-import sys, json
-sys.path.insert(0, '../compute')
+import sys, json, os
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'compute'))
 from fractions import Fraction as F
 from forms import min_vectors
 from rays import extreme_rays
