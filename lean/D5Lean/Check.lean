@@ -100,14 +100,34 @@ def memOK (J : Mat) (mins : List (List Int)) (cd cn C : Int) (bs : List Nat)
 
 /-! ### Vertices: the 21 equations `J'[k] = 4` determine `J'` -/
 
-/-- Coordinates of `k kᵀ` in the basis `y_ab` (`a ≤ b`) of symmetric matrices. -/
+/-- Coordinates of `k kᵀ` in the basis `y_ab` (`a ≤ b`, in the order (0,0), (0,1), …, (5,5))
+of symmetric matrices: `Y[k] = ∑ symc(k)_t y_t`. -/
 def symc (k : List Int) : List Int :=
-  (List.range 6).flatMap fun a => ((List.range 6).filter (a ≤ ·)).map fun b =>
-    (if a == b then 1 else 2) * vg k a * vg k b
+  [vg k 0 * vg k 0,
+   2 * (vg k 0 * vg k 1),
+   2 * (vg k 0 * vg k 2),
+   2 * (vg k 0 * vg k 3),
+   2 * (vg k 0 * vg k 4),
+   2 * (vg k 0 * vg k 5),
+   vg k 1 * vg k 1,
+   2 * (vg k 1 * vg k 2),
+   2 * (vg k 1 * vg k 3),
+   2 * (vg k 1 * vg k 4),
+   2 * (vg k 1 * vg k 5),
+   vg k 2 * vg k 2,
+   2 * (vg k 2 * vg k 3),
+   2 * (vg k 2 * vg k 4),
+   2 * (vg k 2 * vg k 5),
+   vg k 3 * vg k 3,
+   2 * (vg k 3 * vg k 4),
+   2 * (vg k 3 * vg k 5),
+   vg k 4 * vg k 4,
+   2 * (vg k 4 * vg k 5),
+   vg k 5 * vg k 5]
 
 /-- `B * A = c * 1` for the 21 × 21 matrix `A` whose rows are `symc` of the chosen minimal vectors. -/
 def rankOK (mins : List (List Int)) (idx : List Nat) (B : Mat) (c : Int) : Bool :=
-  c != 0 && idx.length == 21 && shape B 21 &&
+  c != 0 && idx.length == 21 && idx.all (· < mins.length) && shape B 21 &&
   (allN 21 fun r => allN 21 fun col =>
     sumN 21 (fun m => ent B r m * vg (symc (mins.getD (idx.getD m 0) [])) col) ==
       if r == col then c else 0)
@@ -232,5 +252,63 @@ def tailOK (pJ pQ : List Int) (wd : Int) (us : List Int) (modeJ : Bool) : Bool :
   match us.getLast? with
   | none => false
   | some u => if modeJ then posInf (comp pJ u 1 wd 6) else posInf (comp (gOf pQ) u 1 wd 5)
+
+/-! ### The certificate records -/
+
+structure Vtx where
+  J : Mat
+  mins : List (List Int)
+  cd : Int
+  cn : Int
+  C : Int
+  bs : List Nat
+  certs : List (List (Int × List Int))
+  idx : List Nat
+  B : Mat
+  c : Int
+  E : Mat
+  dJ : Int
+  dQ : Int
+  eq : Bool
+deriving Inhabited
+
+structure Edge where
+  Y : Mat
+  bounded : Bool
+  tn : Int
+  td : Int
+  target : Nat
+  T : Mat
+  Tinv : Mat
+  kmax : List Int
+  lam : Int
+  mu : Int
+  s : Int
+  n0 : Int
+  w : List Int
+  pJ : List Int
+  pQ : List Int
+  sd : Int
+  sn : List Int
+  Es : List Mat
+  wd : Int
+  us : List Int
+  ps : List (Bool × Bool)
+  tailJ : Bool
+  eqs : List Int
+deriving Inhabited
+
+def Vtx.ok (v : Vtx) : Bool :=
+  shape v.J 6 && symm v.J && memOK v.J v.mins v.cd v.cn v.C v.bs v.certs &&
+  rankOK v.mins v.idx v.B v.c && detOK v.J v.E v.dJ v.dQ &&
+  (decide (0 < v.dJ) || decide (512 ≤ v.dQ)) && ((v.dJ == 0 && v.dQ == 512) == v.eq)
+
+def Edge.ok (J Jto : Mat) (e : Edge) : Bool :=
+  samplesOK J e.Y e.pJ e.pQ e.sd e.sn e.Es && signOK e.pJ e.pQ e.wd e.us e.ps e.eqs &&
+  if e.bounded then
+    boundedOK J e.Y Jto e.T e.Tinv e.tn e.td e.kmax && e.us.getLast? == some (e.tn * e.wd / e.td) &&
+      e.tn * e.wd % e.td == 0
+  else
+    unboundedOK e.Y e.lam e.mu e.s e.n0 e.w && tailOK e.pJ e.pQ e.wd e.us e.tailJ
 
 end D5

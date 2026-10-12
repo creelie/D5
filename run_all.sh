@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Runs every check of the archive.
 #   ./run_all.sh          the four independent checkers (C, C++, Julia, Python) on cert/certificate.txt,
-#                         the lrs cross-check of the extreme rays, the equality classification, and the Lean build
+#                         two from-scratch enumerations of the extreme rays (C, Julia), the cdd/lrs
+#                         comparison, the equality classification, and the Lean build
 #   ./run_all.sh --full   also recomputes the enumeration and the certificate and compares them with the
 #                         files in data/ and cert/
 set -euo pipefail
@@ -32,6 +33,11 @@ julia "$ROOT/checkers/check.jl" "$CERT"
 
 step "Python checker"
 python3 -I "$ROOT/checkers/check.py" "$CERT"
+
+step "extreme rays: double description from scratch (C and Julia)"
+gcc -O2 -std=c11 -Wall -o "$WORK/dd" "$ROOT/checkers/dd.c" -lgmp
+"$WORK/dd" "$CERT"
+julia "$ROOT/checkers/dd.jl" "$CERT"
 
 step "extreme rays: cdd against lrs"
 (cd "$ROOT/compute" && python3 rays_lrs.py "$ROOT/data/vertices.json")
