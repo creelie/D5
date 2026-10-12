@@ -61,8 +61,17 @@ if [ "$FULL" = 1 ]; then
 fi
 
 if [ -d "$ROOT/lean" ]; then
-  step "Lean"
-  (cd "$ROOT/lean" && lake build)
+  step "Lean: the certificate files are generated from cert/certificate.txt"
+  python3 -I "$ROOT/lean/generate/make_lean.py" "$CERT" "$ROOT/data/equality_points.json" "$WORK/lean" >/dev/null
+  diff -r "$WORK/lean/D5Lean/Data" "$ROOT/lean/D5Lean/Data"
+  diff -r "$WORK/lean/D5Lean/Cert" "$ROOT/lean/D5Lean/Cert"
+  step "Lean: build and axioms"
+  (cd "$ROOT/lean" && lake exe cache get && lake build && lake build D5Lean.Axioms) | tee "$WORK/lean.log"
+  grep -q "'D5.certificate' depends on axioms: \[propext, Classical.choice, Quot.sound\]" "$WORK/lean.log" \
+    || { echo "unexpected axioms" >&2; exit 1; }
+  if grep -rnE "sorry|native_decide|admit|^axiom" "$ROOT/lean/D5Lean" --include=*.lean; then
+    echo "forbidden construct in the Lean sources" >&2; exit 1
+  fi
 fi
 
 echo
