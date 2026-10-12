@@ -31,7 +31,19 @@ def roots_info(pJ, pQ, T):
     """list of (status, interval) for the roots of det J in the open edge (0, T); T None means infinity.
     status: 'gt' (det Q > 512 there), 'eq' (= 512), 'lt' (< 512)."""
     if pJ.is_zero:
-        return [('identically-zero', None)]
+        # the whole edge lies in {det J = 0}: det Q - 512 must be >= 0 on [0, T]
+        g = pQ - 512
+        hi = None if T is None else sp.Rational(T.numerator, T.denominator)
+        ivs = g.intervals(inf=0, sup=hi) if hi is not None else g.intervals(inf=0)
+        pts = [sp.Rational(0)] + ([hi] if hi is not None else [])
+        for (a, b), m in ivs:
+            pts += [sp.Rational(a), sp.Rational(b)]
+        pts = sorted(set(pts))
+        mids = [(u + v) / 2 for u, v in zip(pts, pts[1:])]
+        if hi is None:
+            mids.append(pts[-1] + 1)
+        neg = any(g.eval(x) < 0 for x in pts + mids)
+        return [('zero-edge-lt' if neg else 'zero-edge-ok', None)]
     p = pJ.sqf_part()
     g = pQ - 512
     hi = None if T is None else sp.Rational(T.numerator, T.denominator)
@@ -93,7 +105,7 @@ def main(path):
             info = roots_info(pJ, pQ, T)
             seen[key] = info
             for st, iv in info:
-                if st == 'lt':
+                if st in ('lt', 'zero-edge-lt'):
                     bad.append((V['index'], e['ray'], iv))
                 if st == 'eq':
                     eqs.append((V['index'], e['ray'], iv))
