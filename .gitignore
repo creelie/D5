@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+checkers/check_cpp
+checkers/check_c
+*.aux
+*.log
+*.out
+*.fls
+*.fdb_latexmk
+*.synctex.gz

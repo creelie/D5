@@ -1,0 +1,39 @@
+{
+  "title": "Densest packings of two translates of a lattice in five dimensions: paper, certificate, verification programs and Lean 4 formalization",
+  "description": "<p>Let &Lambda; be a lattice in R^5 and b a vector outside &Lambda; such that distinct points of &Lambda; &cup; (&Lambda; + b) are at distance at least 2. The paper proves that the covolume of &Lambda; is at least 16&radic;2, so no packing of unit balls centred at two translates of a lattice in R^5 is denser than the D5 lattice packing, and that equality holds for exactly five configurations up to congruence: three splittings of &radic;2 D5 into two cosets of a sublattice of index two, the uniform packing with kissing configuration Q5, and Leech's 2-periodic layered packing with kissing configuration L5. Every Voronoi cell of such a set has volume at least 8&radic;2.</p><p>The proof reduces the bound to the vertices and edges of a locally finite polyhedron in the space of symmetric 6 &times; 6 matrices; up to symmetry it has 34 vertices, whose cones have 80,695 extreme rays in 480 orbits. <code>cert/certificate.txt</code> records this computation in exact arithmetic. <code>checkers/</code> holds four independent checkers of the certificate (C, C++, Julia, Python) and two double-description enumerations of the extreme rays (C, Julia); cddlib and lrs recompute the rays as well. <code>lean/</code> is a Lean 4 and Mathlib project whose theorem <code>D5.certificate</code> proves in the kernel every vertex and edge statement of the certificate, without native_decide, using only the axioms propext, Classical.choice and Quot.sound. The equality case is proved by hand in the paper. <code>run_all.sh</code> runs every check; <code>dist/</code> holds the PDF, the LaTeX source zip, the arXiv tarball and <code>MasterD5TwoTranslatesZip.zip</code> with every file of the repository.</p>",
+  "upload_type": "software",
+  "license": "mit",
+  "access_right": "open",
+  "creators": [
+    {
+      "name": "Bhattacharjee, Deep",
+      "orcid": "0000-0003-0466-750X"
+    }
+  ],
+  "keywords": [
+    "sphere packing",
+    "periodic packing",
+    "D5 lattice",
+    "Ryshkov polyhedron",
+    "deep hole",
+    "Lean 4"
+  ],
+  "related_identifiers": [
+    {
+      "identifier": "10.1007/s00454-019-00150-6",
+      "relation": "references",
+      "scheme": "doi"
+    },
+    {
+      "identifier": "10.1007/s00454-026-00841-x",
+      "relation": "references",
+      "scheme": "doi"
+    },
+    {
+      "identifier": "10.5281/zenodo.23239767",
+      "relation": "references",
+      "scheme": "doi"
+    }
+  ],
+  "language": "eng"
+}

@@ -1,0 +1,52 @@
+cff-version: 1.2.0
+message: "If you use this work, please cite it as below."
+title: "Densest packings of two translates of a lattice in five dimensions"
+type: software
+authors:
+  - family-names: Bhattacharjee
+    given-names: Deep
+    orcid: "https://orcid.org/0000-0003-0466-750X"
+    affiliation: "Formerly, Electro-Gravitational Space Propulsion Laboratory (EGSPL), Bhubaneswar, Odisha 751030, India"
+    email: d.bhattacharjee@erl-forschung.de
+version: 1.0.0
+date-released: 2026-10-12
+license: MIT
+repository-code: "https://github.com/creelie/D5"
+keywords:
+  - sphere packing
+  - periodic packing
+  - D5 lattice
+  - Ryshkov polyhedron
+  - deep hole
+  - Lean 4
+abstract: >-
+  Let Λ be a lattice in R^5 and b a vector outside Λ such that distinct
+  points of Λ ∪ (Λ + b) are at distance at least 2. We prove that the
+  covolume of Λ is at least 16√2. Hence no packing of unit balls centred at
+  two translates of a lattice in R^5 is denser than the D5 lattice packing.
+  Equality holds for exactly five such configurations up to congruence:
+  three splittings of √2 D5 and two non-lattice packings.
+references:
+  - type: article
+    title: "Locally optimal 2-periodic sphere packings"
+    authors:
+      - family-names: Andreanov
+        given-names: Alexei
+      - family-names: Kallus
+        given-names: Yoav
+    journal: "Discrete & Computational Geometry"
+    volume: 63
+    year: 2020
+    start: 182
+    end: 208
+    doi: 10.1007/s00454-019-00150-6
+  - type: article
+    title: "Variations on five-dimensional sphere packings"
+    authors:
+      - family-names: Cohn
+        given-names: Henry
+      - family-names: Rajagopal
+        given-names: Isaac
+    journal: "Discrete & Computational Geometry"
+    year: 2026
+    doi: 10.1007/s00454-026-00841-x
