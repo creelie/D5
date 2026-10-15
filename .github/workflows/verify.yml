@@ -1,0 +1,74 @@
+name: verify
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  checks:
+    name: C, C++, Julia and Python checks
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install GMP, cddlib, lrslib and the Python packages
+        run: |
+          sudo apt-get -o Acquire::Retries=3 update
+          sudo apt-get -o Acquire::Retries=3 install -y --no-install-recommends \
+            libgmp-dev libcdd-dev lrslib
+          python -m pip install sympy numpy pycddlib==3.0.2
+      - uses: julia-actions/setup-julia@v2
+        with:
+          version: "1.10"
+      - run: SKIP_LEAN=1 ./run_all.sh
+
+  paper:
+    name: Build the paper
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install TeX Live
+        run: |
+          sudo apt-get -o Acquire::Retries=3 update
+          sudo apt-get -o Acquire::Retries=3 install -y --no-install-recommends \
+            texlive-latex-recommended texlive-latex-extra texlive-pictures \
+            texlive-fonts-recommended lmodern poppler-utils zip
+      - run: ./build_paper.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: paper
+          path: dist/
+
+  kernel:
+    name: Lean 4 with Mathlib, checked by the kernel
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install elan
+        run: |
+          curl -sSfL https://raw.githubusercontent.com/leanprover/elan/master/elan-init.sh \
+            | sh -s -- -y --default-toolchain none
+          echo "$HOME/.elan/bin" >> "$GITHUB_PATH"
+      - name: The certificate files are generated from cert/certificate.txt
+        run: |
+          python3 -I lean/generate/make_lean.py cert/certificate.txt data/equality_points.json "$RUNNER_TEMP/lean" > /dev/null
+          diff -r "$RUNNER_TEMP/lean/D5Lean/Data" lean/D5Lean/Data
+          diff -r "$RUNNER_TEMP/lean/D5Lean/Cert" lean/D5Lean/Cert
+      - name: Build and print the axioms
+        working-directory: lean
+        run: |
+          lake exe cache get
+          lake build
+          lake build D5Lean.Axioms 2>&1 | tee "$RUNNER_TEMP/axioms.log"
+          grep -q "'D5.certificate' depends on axioms: \[propext, Classical.choice, Quot.sound\]" "$RUNNER_TEMP/axioms.log"
+          ! grep -rnE "sorry|native_decide|admit|^axiom" D5Lean --include=*.lean

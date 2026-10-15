@@ -1,7 +1,12 @@
 # Densest packings of two translates of a lattice in five dimensions
 
-Paper, certificate, verification programs and Lean 4 formalization by
-Deep Bhattacharjee.
+**Deep Bhattacharjee** (corresponding author; ORCID 0000-0003-0466-750X;
+itsdeep@live.com, d.bhattacharjee@erl-forschung.de) and **Ushashi
+Bhattacharya** (ORCID 0009-0002-2254-3914; rai.bhattacharya.in@gmail.com)
+
+* Paper (PDF): [`preprintAndreanovKallusTwoPeriodicPackingD5/AndreanovKallusTwoPeriodicPackingD5.pdf`](preprintAndreanovKallusTwoPeriodicPackingD5/AndreanovKallusTwoPeriodicPackingD5.pdf)
+* Everything in one file: [MasterAndreanovKallusTwoPeriodicPackingD5_masterzipfinal2.zip](https://github.com/creelie/D5/raw/main/MasterAndreanovKallusTwoPeriodicPackingD5_masterzipfinal2.zip)
+* Lean formalization, programs and certificate on Zenodo: [doi:10.5281/zenodo.23323366](https://doi.org/10.5281/zenodo.23323366) (all versions; release v2.0.0, which adds the second author, gets its own DOI when it is published)
 
 **Theorem.** Let Λ ⊂ R^5 be a lattice and b ∈ R^5 \ Λ such that distinct
 points of P = Λ ∪ (Λ + b) are at distance at least 2. Then
@@ -31,16 +36,19 @@ equality case is proved by hand through the deep holes of the lattice
 
 | Path | Content |
 |---|---|
-| `paper/main.tex`, `paper/main.pdf` | the paper (amsart, 17 pages) |
-| `dist/` | the PDF, the LaTeX source zip, the arXiv tarball and `MasterD5TwoTranslatesZip.zip` with every file of the repository |
+| `paper/main.tex`, `paper/figures/` | the paper (amsart, 18 pages) and its three schematic figures (TikZ) |
+| `preprintAndreanovKallusTwoPeriodicPackingD5/AndreanovKallusTwoPeriodicPackingD5.pdf` | the paper (the only file in this folder) |
+| `dist/` | `AndreanovKallusTwoPeriodicPackingD5_final2.pdf`, the LaTeX source zip `AndreanovKallusTwoPeriodicPackingD5_final2-tex.zip` (figures as PNG) and the arXiv tarball `AndreanovKallusTwoPeriodicPackingD5_final2-arxiv.tar.gz` |
+| `MasterAndreanovKallusTwoPeriodicPackingD5_masterzipfinal2.zip` | every file of the repository with `dist/` and the preprint folder |
 | `journal/JOURNAL.md` | target journal (Discrete & Computational Geometry), format and AI policy |
 | `compute/` | the enumeration (`enumerate.py`) and the analysis of the equality points (`equality.py`, `classify_eq.py`, `lattice_check.py`, `configurations.py`) |
 | `data/` | the 34 vertices with their rays and edges (`vertices.json`), the five equality points and their classes |
 | `cert/certificate.txt` | the certificate (4 MB): for each vertex its entries, minimal vectors, symmetry generators, all extreme rays, and one edge per orbit with its end point and a matrix in Γ, or its unbounded direction X_{u,a} |
 | `checkers/` | four independent checkers of the certificate in C, C++ (GMP rationals), Julia and Python (exact rationals), and two double-description enumerations of the extreme rays from scratch in C and Julia |
 | `lean/` | Lean 4 + Mathlib project; `D5.certificate` proves, in the kernel, every vertex and edge statement of the certificate |
-| `run_all.sh` | runs every check |
-| `build_paper.sh` | builds the paper and the files in `dist/` |
+| `run_all.sh` | runs every check (`SKIP_LEAN=1` skips the Lean build) |
+| `build_paper.sh` | builds the paper, `dist/`, the preprint folder and the master zip |
+| `build_submission.sh` | the manuscript PDF and a source zip with the figures as Fig1 to Fig3 (PDF and EPS), in `build/submission/` |
 
 ## Running the checks
 
@@ -67,15 +75,22 @@ k in M*. Each vertex and each edge is one theorem `checker = true`, proved by
 `decide +kernel`, so the kernel evaluates the Boolean checker of
 `lean/D5Lean/Check.lean`; the soundness lemmas in `lean/D5Lean/Sound/` derive
 the statements above from it. `native_decide` is not used, and `#print axioms D5.certificate` gives propext, Classical.choice and
-Quot.sound. The rank conditions that make the J_i vertices and the rays
-extreme, the completeness of the ray lists and the orbit decompositions are
-checked by the programs, not in Lean; the reduction and the equality case are
-proved by hand in the paper.
+Quot.sound. Not formalized: the rank conditions that make the J_i vertices and the rays
+extreme, the completeness of the ray lists and the orbit decompositions. They
+are checked by the programs in exact arithmetic (the completeness four times,
+by cddlib, lrs and the two double-description programs). A formal certificate
+of completeness would have to cover every set of 20 independent minimal
+vectors of a vertex with up to 36 minimal vectors, or the faces at the many
+degenerate rays (vertex 5 alone has 38,124 extreme rays), and none has been
+produced. The reduction and the equality case are proved by hand in the
+paper.
 
 ## Archive
 
 Zenodo, all versions: [10.5281/zenodo.23323366](https://doi.org/10.5281/zenodo.23323366);
 release v1.0.0: [10.5281/zenodo.23323367](https://doi.org/10.5281/zenodo.23323367).
+Release v2.0.0 (two authors, figures, the declarations of the journal and the
+preprint folder) gets its DOI when it is published.
 
 ## License
 
