@@ -6,7 +6,7 @@ Bhattacharya** (ORCID 0009-0002-2254-3914; rai.bhattacharya.in@gmail.com)
 
 * Paper (PDF): [`preprintAndreanovKallusTwoPeriodicPackingD5/AndreanovKallusTwoPeriodicPackingD5.pdf`](preprintAndreanovKallusTwoPeriodicPackingD5/AndreanovKallusTwoPeriodicPackingD5.pdf)
 * Everything in one file: [MasterAndreanovKallusTwoPeriodicPackingD5_masterzipfinal2.zip](https://github.com/creelie/D5/raw/main/MasterAndreanovKallusTwoPeriodicPackingD5_masterzipfinal2.zip)
-* Lean formalization, programs and certificate on Zenodo: [doi:10.5281/zenodo.23323366](https://doi.org/10.5281/zenodo.23323366) (all versions; release v2.0.0, which adds the second author, gets its own DOI when it is published)
+* Lean formalization, programs and certificate on Zenodo: [doi:10.5281/zenodo.23387908](https://doi.org/10.5281/zenodo.23387908) (release v2.0.0; all versions: [doi:10.5281/zenodo.23323366](https://doi.org/10.5281/zenodo.23323366))
 
 **Theorem.** Let Λ ⊂ R^5 be a lattice and b ∈ R^5 \ Λ such that distinct
 points of P = Λ ∪ (Λ + b) are at distance at least 2. Then
@@ -88,6 +88,8 @@ paper.
 ## Archive
 
 Zenodo, all versions: [10.5281/zenodo.23323366](https://doi.org/10.5281/zenodo.23323366);
+release v2.0.0 (both authors, the figures and the preprint folder): [10.5281/zenodo.23387908](https://doi.org/10.5281/zenodo.23387908);
+release v1.0.1: [10.5281/zenodo.23323436](https://doi.org/10.5281/zenodo.23323436);
 release v1.0.0: [10.5281/zenodo.23323367](https://doi.org/10.5281/zenodo.23323367).
 Release v2.0.0 (two authors, figures, the declarations of the journal and the
 preprint folder) gets its DOI when it is published.

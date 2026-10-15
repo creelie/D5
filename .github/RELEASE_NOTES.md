@@ -23,4 +23,4 @@ Files:
 
 Run `run_all.sh` to repeat the checks and `build_paper.sh` to rebuild the files above.
 
-Zenodo, all versions: [10.5281/zenodo.23323366](https://doi.org/10.5281/zenodo.23323366).
+Zenodo: release v2.0.0 [10.5281/zenodo.23387908](https://doi.org/10.5281/zenodo.23387908); all versions [10.5281/zenodo.23323366](https://doi.org/10.5281/zenodo.23323366).
