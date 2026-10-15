@@ -3,7 +3,7 @@
 #   ./run_all.sh          the four independent checkers (C, C++, Julia, Python) on cert/certificate.txt,
 #                         two from-scratch enumerations of the extreme rays (C, Julia), the cdd/lrs
 #                         comparison, the equality classification, the checks of the five extremal
-#                         configurations, and the Lean build
+#                         configurations, and the Lean build (skipped with SKIP_LEAN=1)
 #   ./run_all.sh --full   also recomputes the enumeration and the certificate and compares them with the
 #                         files in data/ and cert/
 set -euo pipefail
@@ -15,7 +15,9 @@ trap 'rm -rf "$WORK"' EXIT
 
 need() { command -v "$1" >/dev/null 2>&1 || { echo "missing tool: $1" >&2; exit 2; }; }
 for t in gcc g++ julia python3 lrs; do need "$t"; done
-[ -d "$ROOT/lean" ] && need lake
+LEAN=0
+[ -d "$ROOT/lean" ] && [ "${SKIP_LEAN:-0}" != 1 ] && LEAN=1
+[ "$LEAN" = 1 ] && need lake
 python3 -c "import cdd.gmp, sympy, numpy" 2>/dev/null || { echo "missing Python modules: pycddlib, sympy, numpy" >&2; exit 2; }
 
 CERT="$ROOT/cert/certificate.txt"
@@ -64,7 +66,7 @@ if [ "$FULL" = 1 ]; then
   cmp "$WORK/certificate.txt" "$CERT"
 fi
 
-if [ -d "$ROOT/lean" ]; then
+if [ "$LEAN" = 1 ]; then
   step "Lean: the certificate files are generated from cert/certificate.txt"
   python3 -I "$ROOT/lean/generate/make_lean.py" "$CERT" "$ROOT/data/equality_points.json" "$WORK/lean" >/dev/null
   diff -r "$WORK/lean/D5Lean/Data" "$ROOT/lean/D5Lean/Data"

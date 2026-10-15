@@ -7,8 +7,13 @@ authors:
     given-names: Deep
     orcid: "https://orcid.org/0000-0003-0466-750X"
     affiliation: "Formerly, Electro-Gravitational Space Propulsion Laboratory (EGSPL), Bhubaneswar, Odisha 751030, India"
-    email: d.bhattacharjee@erl-forschung.de
-version: 1.0.1
+    email: itsdeep@live.com
+  - family-names: Bhattacharya
+    given-names: Ushashi
+    orcid: "https://orcid.org/0009-0002-2254-3914"
+    affiliation: "Formerly, National Taiwan University, Taipei 106319, Taiwan"
+    email: rai.bhattacharya.in@gmail.com
+version: 2.0.0
 doi: 10.5281/zenodo.23323366
 identifiers:
   - type: doi
@@ -17,7 +22,7 @@ identifiers:
   - type: doi
     value: 10.5281/zenodo.23323367
     description: Release v1.0.0
-date-released: 2026-10-12
+date-released: 2026-10-15
 license: MIT
 repository-code: "https://github.com/creelie/D5"
 keywords:
@@ -28,12 +33,11 @@ keywords:
   - deep hole
   - Lean 4
 abstract: >-
-  Let Λ be a lattice in R^5 and b a vector outside Λ such that distinct
-  points of Λ ∪ (Λ + b) are at distance at least 2. We prove that the
-  covolume of Λ is at least 16√2. Hence no packing of unit balls centred at
-  two translates of a lattice in R^5 is denser than the D5 lattice packing.
-  Equality holds for exactly five such configurations up to congruence:
-  three splittings of √2 D5 and two non-lattice packings.
+  We prove that no packing of unit balls in R^5 whose centres form two
+  translates of a lattice is denser than the D5 lattice packing. Up to
+  congruence exactly three such packings attain this density: √2 D5, a
+  layered packing of Leech, and the packing with Szöllősi's kissing
+  configuration.
 references:
   - type: article
     title: "Locally optimal 2-periodic sphere packings"
@@ -56,5 +60,8 @@ references:
       - family-names: Rajagopal
         given-names: Isaac
     journal: "Discrete & Computational Geometry"
+    volume: 76
     year: 2026
+    start: 1660
+    end: 1678
     doi: 10.1007/s00454-026-00841-x

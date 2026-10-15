@@ -1,13 +1,19 @@
 {
-  "title": "Densest packings of two translates of a lattice in five dimensions: paper, certificate, verification programs and Lean 4 formalization",
-  "description": "<p>Let &Lambda; be a lattice in R^5 and b a vector outside &Lambda; such that distinct points of &Lambda; &cup; (&Lambda; + b) are at distance at least 2. The paper proves that the covolume of &Lambda; is at least 16&radic;2, so no packing of unit balls centred at two translates of a lattice in R^5 is denser than the D5 lattice packing, and that equality holds for exactly five configurations up to congruence: three splittings of &radic;2 D5 into two cosets of a sublattice of index two, the uniform packing with kissing configuration Q5, and Leech's 2-periodic layered packing with kissing configuration L5. Every Voronoi cell of such a set has volume at least 8&radic;2.</p><p>The proof reduces the bound to the vertices and edges of a locally finite polyhedron in the space of symmetric 6 &times; 6 matrices; up to symmetry it has 34 vertices, whose cones have 80,695 extreme rays in 480 orbits. <code>cert/certificate.txt</code> records this computation in exact arithmetic. <code>checkers/</code> holds four independent checkers of the certificate (C, C++, Julia, Python) and two double-description enumerations of the extreme rays (C, Julia); cddlib and lrs recompute the rays as well. <code>lean/</code> is a Lean 4 and Mathlib project whose theorem <code>D5.certificate</code> proves in the kernel every vertex and edge statement of the certificate, without native_decide, using only the axioms propext, Classical.choice and Quot.sound. The equality case is proved by hand in the paper. <code>run_all.sh</code> runs every check; <code>dist/</code> holds the PDF, the LaTeX source zip, the arXiv tarball and <code>MasterD5TwoTranslatesZip.zip</code> with every file of the repository.</p>",
+  "title": "Densest packings of two translates of a lattice in five dimensions: paper, Lean 4 formalization, certificate and verification programs",
+  "description": "<p>We prove that no packing of unit balls in R^5 whose centres form two translates of a lattice is denser than the D5 lattice packing: if distinct points of &Lambda; &cup; (&Lambda; + b) are at distance at least 2, then the covolume of &Lambda; is at least 16&radic;2. Equality holds for exactly five pairs (&Lambda;, b) up to congruence, giving three point sets: &radic;2 D5, the uniform packing with Szöllősi's kissing configuration Q5, and Leech's 2-periodic layered packing with kissing configuration L5. Every Voronoi cell of such a set has volume at least 8&radic;2.</p><p><code>preprintAndreanovKallusTwoPeriodicPackingD5/</code> holds the paper as a PDF; <code>paper/</code> holds the LaTeX source (amsart) with three schematic figures; <code>dist/</code> holds the PDF, the LaTeX source zip and the arXiv tarball; <code>MasterAndreanovKallusTwoPeriodicPackingD5_masterzipfinal2.zip</code> holds every file of the repository. The proof reduces the bound to the vertices and edges of a locally finite polyhedron in the space of symmetric 6 &times; 6 matrices; up to symmetry it has 34 vertices, whose cones have 80,695 extreme rays in 480 orbits. <code>cert/certificate.txt</code> records this computation in exact arithmetic. <code>checkers/</code> holds four independent checkers of the certificate (C, C++, Julia, Python) and two double-description enumerations of the extreme rays (C, Julia); cddlib and lrs recompute the rays as well. <code>lean/</code> is a Lean 4 and Mathlib project whose theorem <code>D5.certificate</code> proves in the kernel the vertex and edge statements of the certificate, without native_decide, using only the axioms propext, Classical.choice and Quot.sound; the rank conditions, the completeness of the ray lists and the orbit decompositions are checked by the programs and are not formalized. The reduction and the equality case are proved by hand in the paper. <code>run_all.sh</code> runs every check.</p>",
   "upload_type": "software",
   "license": "mit",
   "access_right": "open",
   "creators": [
     {
       "name": "Bhattacharjee, Deep",
-      "orcid": "0000-0003-0466-750X"
+      "orcid": "0000-0003-0466-750X",
+      "affiliation": "Formerly, Electro-Gravitational Space Propulsion Laboratory (EGSPL), Bhubaneswar, Odisha 751030, India"
+    },
+    {
+      "name": "Bhattacharya, Ushashi",
+      "orcid": "0009-0002-2254-3914",
+      "affiliation": "Formerly, National Taiwan University, Taipei 106319, Taiwan"
     }
   ],
   "keywords": [
@@ -16,7 +22,10 @@
     "D5 lattice",
     "Ryshkov polyhedron",
     "deep hole",
-    "Lean 4"
+    "Lean 4",
+    "52C17",
+    "11H31",
+    "11H55"
   ],
   "related_identifiers": [
     {
@@ -30,10 +39,12 @@
       "scheme": "doi"
     },
     {
-      "identifier": "10.5281/zenodo.23239767",
+      "identifier": "10.5281/zenodo.23387006",
       "relation": "references",
       "scheme": "doi"
     }
   ],
-  "language": "eng"
+  "language": "eng",
+  "version": "2.0.0",
+  "notes": "Corresponding author: Deep Bhattacharjee, itsdeep@live.com (primary), d.bhattacharjee@erl-forschung.de (secondary). Ushashi Bhattacharya: rai.bhattacharya.in@gmail.com."
 }

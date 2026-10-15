@@ -4,6 +4,7 @@
 \usepackage{lmodern}
 \usepackage{amssymb,amsmath}
 \usepackage{booktabs,array}
+\usepackage{graphicx}
 \usepackage[dvipsnames]{xcolor}
 \usepackage[margin=1.15in]{geometry}
 \usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
@@ -19,6 +20,7 @@
 
 \numberwithin{equation}{section}
 \numberwithin{table}{section}
+\numberwithin{figure}{section}
 
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\Z}{\mathbb{Z}}
@@ -33,8 +35,10 @@
 \newcommand{\cand}{\mathcal{C}}
 \newcommand{\one}{\mathbf{1}}
 \newcommand{\T}{\mathsf{T}}
-\hypersetup{pdftitle={Densest packings of two translates of a lattice in five dimensions},pdfauthor={Deep Bhattacharjee}}
+\hypersetup{pdftitle={Densest packings of two translates of a lattice in five dimensions},pdfauthor={Deep Bhattacharjee and Ushashi Bhattacharya}}
 \providecommand{\doi}[1]{\href{https://doi.org/#1}{doi:\detokenize{#1}}}
+\newcommand{\zenodoID}{10.5281/zenodo.23323366}
+\newcommand{\preprintURL}{https://github.com/creelie/D5/blob/main/preprintAndreanovKallusTwoPeriodicPackingD5/AndreanovKallusTwoPeriodicPackingD5.pdf}
 
 \raggedbottom
 \begin{document}
@@ -43,23 +47,25 @@
 
 \author{Deep Bhattacharjee}
 \address{Formerly, Electro-Gravitational Space Propulsion Laboratory (EGSPL),\newline Bhubaneswar, Odisha 751030, India}
-\email{d.bhattacharjee@erl-forschung.de}
 \email{itsdeep@live.com}
-\urladdr{https://orcid.org/0000-0003-0466-750X}
-\thanks{Corresponding author: \href{mailto:d.bhattacharjee@erl-forschung.de}{d.bhattacharjee@erl-forschung.de}; ORCID \href{https://orcid.org/0000-0003-0466-750X}{\mbox{0000-0003-0466-750X}}}
+\email{d.bhattacharjee@erl-forschung.de}
+\author{Ushashi Bhattacharya}
+\address{Formerly, National Taiwan University, Taipei 106319, Taiwan}
+\email{rai.bhattacharya.in@gmail.com}
+\thanks{Corresponding author: Deep Bhattacharjee. ORCID iDs: Deep Bhattacharjee \href{https://orcid.org/0000-0003-0466-750X}{\mbox{0000-0003-0466-750X}}; Ushashi Bhattacharya \href{https://orcid.org/0009-0002-2254-3914}{\mbox{0009-0002-2254-3914}}.}
 
 \subjclass[2020]{Primary 52C17; Secondary 11H31, 11H55}
 \keywords{sphere packing, periodic packing, $D_5$ lattice, Ryshkov polyhedron, deep hole, Voronoi cell}
 
 \begin{abstract}
-Let $\Lambda$ be a lattice in $\R^5$ and $b$ a vector outside $\Lambda$ such that distinct points of $\Lambda\cup(\Lambda+b)$ are at distance at least $2$. We prove that the covolume of $\Lambda$ is at least $16\sqrt2$. Hence no packing of unit balls centred at two translates of a lattice in $\R^5$ is denser than the $D_5$ lattice packing. Equality holds for exactly five such configurations up to congruence: three splittings of $\sqrt2\,D_5$ and two non-lattice packings.
+We prove that no packing of unit balls in $\R^5$ whose centres form two translates of a lattice is denser than the $D_5$ lattice packing. Up to congruence exactly three such packings attain this density: $\sqrt2\,D_5$, a layered packing of Leech, and the packing with Szöllősi's kissing configuration.
 \end{abstract}
 
 \maketitle
 
 \section{Introduction}
 
-The root lattice $D_5=\{x\in\Z^5:x_1+\dots+x_5\in2\Z\}$, scaled by $\sqrt2$ so that its minimal distance is $2$, carries a packing of unit balls of density $\pi^2/(15\sqrt2)$. Korkine and Zolotarev proved that no lattice packing of balls in $\R^5$ is denser~\cite{KZ1877}. Whether $D_5$ is densest among all packings in $\R^5$ is open, and non-lattice packings of the same density exist: Leech constructed three~\cite{Leech1967}, Conway and Sloane placed them in a family of layered packings~\cite{CS1995}, and Cohn and Rajagopal~\cite{CR2026} found further examples after Szöllősi's discovery of a new kissing configuration of $40$ points~\cite{Szollosi2023}.
+The root lattice $D_5=\{x\in\Z^5:x_1+\dots+x_5\in2\Z\}$~\cite[Ch.~4, \S7.1]{CS1999}, scaled by $\sqrt2$ so that its minimal distance is $2$, carries a packing of unit balls of density $\pi^2/(15\sqrt2)$. Korkine and Zolotarev proved that no lattice packing of balls in $\R^5$ is denser~\cite{KZ1877}. Whether $D_5$ is densest among all packings in $\R^5$ is open, and non-lattice packings of the same density exist: Leech constructed three~\cite{Leech1967}, Conway and Sloane placed them in a family of layered packings~\cite{CS1995}, and Cohn and Rajagopal~\cite{CR2026} found further examples after Szöllősi's discovery of a new kissing configuration of $40$ points~\cite{Szollosi2023}.
 
 A periodic packing is a finite union of translates of one lattice. After lattices, the next case is two translates, $P=\Lambda\cup(\Lambda+b)$. Andreanov and Kallus~\cite{AK2020} extended Voronoi's algorithm for perfect forms~\cite{Voronoi1908} to such sets. In dimension $5$ their enumeration found that the maximal density is that of $D_5$, attained by five configurations, three of which represent $D_5$. Parts of their computation used floating-point arithmetic, and they present these results as numerical rather than rigorous~\cite[\S4]{AK2020}. Cohn and Rajagopal cite the bound as a theorem of~\cite{AK2020}~\cite[\S4.2]{CR2026}. We prove the bound together with the list of equality cases. The four-dimensional statement is proved in~\cite{Bha2026a}.
 
@@ -96,10 +102,17 @@ A lattice $L$ is the union of two cosets of any sublattice $\Lambda$ of index tw
 Let $P\subset\R^5$ be a lattice, or a union of two translates of a lattice, such that distinct points of $P$ are at distance at least $2$. Every Voronoi cell of $P$ has volume at least $8\sqrt2$, the volume of the Voronoi cell of $\sqrt2\,D_5$. Equality holds if and only if $P$ is congruent to $\sqrt2\,D_5$, $\sqrt2\,P_1$ or $\sqrt2\,P_2$.
 \end{corollary}
 
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.8\textwidth]{figures/translates}
+\caption{Two translates of a lattice, drawn in three dimensions: the points of $\Lambda$ and of $\Lambda+b$, with a cell spanned by a basis of $\Lambda$. Such a set is described by the Gram matrix of the basis together with $b$. In five dimensions the densest packings of unit balls centred at such sets are $\sqrt2\,D_5$, $\sqrt2\,P_1$ and $\sqrt2\,P_2$ (Theorem~\ref{thm:main}).}
+\label{fig:translates}
+\end{figure}
+
 \subsection*{Method}
 A pair $(\Lambda,b)$ is encoded by the $6\times6$ Gram matrix $J$ of a basis of $\Lambda$ together with $b$. The packing condition becomes infinitely many linear inequalities $J[k]\ge4$, which cut out a locally finite polyhedron $\Rk$ in the $21$-dimensional space of symmetric matrices (Section~\ref{sec:polyhedron}). Packings are the points of $\Rk$ with $\det J=0$, and the quantity to minimise is $\det Q$, where $Q$ is the upper left $5\times5$ block of $J$. Proposition~\ref{prop:descent} moves every packing, without increasing $\det Q$, to a vertex of $\Rk$ or to an interior point of an edge. The argument uses only the concavity of $\log\det Q$ and of the Schur complement of $Q$ in $J$.
 
-Up to the integral symmetries of the problem, $\Rk$ has $34$ vertices and $480$ edges at them (Proposition~\ref{prop:computation}). This finite statement is computed in exact arithmetic; four independent programs check a certificate for it, two further programs and two standard packages recompute the extreme rays of the vertex cones, and the Lean~4 kernel checks the certificate of every vertex and every edge (Appendix~\ref{app:verification}). The $25$ unbounded edges are explicit (Table~\ref{tab:unbounded}). In dimension four every vertex other than the optimum has $\det J>0$; in dimension five two vertices have $\det J<0$, and the bounded edges at them carry packings (Remark~\ref{rem:bounded}).
+Up to the integral symmetries of the problem, $\Rk$ has $34$ vertices and $480$ edges at them (Proposition~\ref{prop:computation}). This finite statement is computed in exact arithmetic and recorded in a certificate. Four independent implementations check the certificate, four independent enumerations recompute the extreme rays of the vertex cones, and a proof in Lean~4 checks in the kernel the minimal vectors and determinants of every vertex and the statements of the certificate on every listed edge (Appendix~\ref{app:verification} states exactly what is formalized). The $25$ unbounded edges are explicit (Table~\ref{tab:unbounded}). In dimension four every vertex other than the optimum has $\det J>0$; in dimension five two vertices have $\det J<0$, and the bounded edges at them carry packings (Remark~\ref{rem:bounded}).
 
 The equality case is proved by hand in Section~\ref{sec:equality}. A deep hole of a lattice is surrounded by lattice points that span the space affinely (Lemma~\ref{lem:deephole}). Perturbing along the directions of $\Rk$ at an extremal configuration then shows that it is a vertex or an interior point of an edge of $\Rk$, so it appears in the finite list (Proposition~\ref{prop:equality}). Section~\ref{sec:five} identifies the five configurations.
 
@@ -304,6 +317,13 @@ The function $\varphi(\tau)=f(J(\tau))$ is concave on $I$ by Lemma~\ref{lem:logd
 If $\tau_0$ is an end point of $I_0$, then $X\notin L_{J_1}$: otherwise $J_1\pm\eta X\in\Rk$ for small $\eta>0$ by Lemma~\ref{lem:local}(2). With~\eqref{eq:mininc}, $d(J_1)\le d(J)-1$ and $\pi(J_1)\le2d(J)-1<\pi(J)$. If $\tau_0$ is not an end point of $I_0$, we are in case (a), $\sigma(J_1)=0$ by the choice of $I$, and $\pi(J_1)=2d(J_1)\le2d(J)<\pi(J)$.
 \end{proof}
 
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.78\textwidth]{figures/descent}
+\caption{One step of the proof of Proposition~\ref{prop:descent} in a two-dimensional face $F$ of $\Rk$, in case (b), $\sigma(J)=0$. The set $F\cap\{\sigma>0\}$ (shaded) is convex because $\sigma$ is concave. On the line through $J$ in the direction $X$, chosen with $X[u]=0$, we have $\sigma\le0$, and $\log\det Q$ is concave on it, so one of the two ends of the chord, here $J_1$, has $\det Q(J_1)\le\det Q(J)$. The point $J_1$ lies on an edge of $F$. From there the same step moves along the edge to a vertex or to a point with $\sigma=0$.}
+\label{fig:descent}
+\end{figure}
+
 \section{The vertices and edges of \texorpdfstring{$\Rk$}{R}}\label{sec:computation}
 
 \begin{definition}\label{def:Xua}
@@ -452,6 +472,13 @@ The maximum exists because $z\mapsto\dist(z,\Lambda)$ is continuous and $\Lambda
 \]
 and for $v\in\Lambda\setminus N(c)$, $|v-c-\varepsilon w|\ge\rho+\delta-\varepsilon>\rho$. So $\dist(c+\varepsilon w,\Lambda)>\rho$, contradicting the definition of $\rho$.
 \end{proof}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/deephole}
+\caption{Lemma~\ref{lem:deephole} in the plane. Left: a deep hole $c$ of a lattice; the open disc of radius $\rho$ about $c$ contains no lattice point, and the points $N(c)$ on its boundary span the plane affinely. Right: if $N(c)$ lay on a line $H$, moving $c$ away from $H$ by a small $\varepsilon w$ would increase the distance to every point of $N(c)$, and to the whole lattice, beyond $\rho$.}
+\label{fig:deephole}
+\end{figure}
 
 A point $c$ with $\dist(c,\Lambda)=\rho$ is a \emph{deep hole} of $\Lambda$.
 
@@ -661,34 +688,35 @@ $i$ & classes $j$ of the end points $J_i+t^*Y$ of the listed edges at $J_i$\\
 
 \section{Computation and verification}\label{app:verification}
 
-The computation behind Proposition~\ref{prop:computation} follows~\cite{AK2020} and Voronoi's algorithm~\cite{Voronoi1908,Schuermann2009}, in exact arithmetic throughout. All programs, data and certificates are in the archive~\cite{D5archive}, and the script \texttt{run\_all.sh} runs every check.
+The computation behind Proposition~\ref{prop:computation} follows~\cite{AK2020} and Voronoi's algorithm~\cite{Voronoi1908,Schuermann2009}, in exact arithmetic throughout. The programs, the data, the certificate and the Lean formalization are archived at Zenodo~\cite{D5archive}.
 
-\subsection*{Enumeration} Starting from $J_0$, the Python program \texttt{compute/enumerate.py} processes each new vertex $J$: it computes $\Min(J)$ by the method of Fincke and Pohst~\cite{FinckePohst1985} applied to the decomposition of Lemma~\ref{lem:sigma}(1); computes the extreme rays of $C_J$ with \texttt{cddlib}~\cite{cdd} in GMP rational arithmetic; computes automorphisms of $J$ in $\Gamma$ and the orbits of the rays under the group $G$ they generate; for one ray $Y$ per orbit, decides whether $t^*=\infty$ (Lemma~\ref{lem:Xua}) and otherwise finds $t^*$ exactly; and tests $\Gamma$-equivalence of $J+t^*Y$ with the known vertices by a search over images of minimal vectors. The search closes after $34$ classes, with $80{,}695$ rays in $480$ orbits. \texttt{cert/make\_cert.py} writes the certificate \texttt{cert/certificate.txt}: for each vertex its entries, its minimal vectors, generators of $G_i$, all extreme rays of $C_{J_i}$ as primitive integer vectors, and for each orbit a representative ray with $t^*$, $j$ and a matrix $T\in\Gamma$ with $T^\T J_jT=J_i+t^*Y$ (bounded) or its data $(u,a)$ (unbounded); and the five points $E_m$.
+\subsection*{Enumeration} Starting from $J_0$, for each new vertex $J$ we compute $\Min(J)$ by the method of Fincke and Pohst~\cite{FinckePohst1985}, applied to the decomposition of Lemma~\ref{lem:sigma}(1); we compute the extreme rays of $C_J$ by the double description method~\cite{FukudaProdon1996} in exact rational arithmetic; we compute automorphisms of $J$ in $\Gamma$ and the orbits of the rays under the group $G$ they generate; for one ray $Y$ per orbit we decide whether $t^*=\infty$ (Lemma~\ref{lem:Xua}) and otherwise find $t^*$ exactly; and we test $\Gamma$-equivalence of $J+t^*Y$ with the known vertices by a search over images of minimal vectors. The search closes after $34$ classes, with $80{,}695$ rays in $480$ orbits. The certificate records, for each vertex, its entries, its minimal vectors, generators of $G_i$ and all extreme rays of $C_{J_i}$ as primitive integer vectors; for each orbit, a representative ray with $t^*$, $j$ and a matrix $T\in\Gamma$ with $T^\T J_jT=J_i+t^*Y$ (bounded) or its data $(u,a)$ (unbounded); and the five points $E_m$.
 
 \subsection*{Independent checks of the certificate}
-Four programs, in C and C++ (GMP rationals), Julia and Python (exact rationals), read the certificate and check, without using the enumeration code: that each $J_i$ lies in $\Rk$ and has exactly the listed minimal vectors, by an enumeration of all $k\in\M^*$ with $J_i[k]\le4$ from an exact $LDL^\T$ decomposition; that these have rank $21$; that the listed generators lie in $\Gamma$ and fix $J_i$; that the listed rays are distinct, primitive, lie in $C_{J_i}$ and are extreme (rank $20$); that the generators permute them and that the representatives meet each orbit once, with the stated orbit sizes; for each bounded representative, that $J_i+t^*Y\in\Rk$, that some minimal vector $k$ of $J_i+t^*Y$ has $Y[k]<0$, and that $T^\T J_jT=J_i+t^*Y$ with $T\in\Gamma$; for each unbounded representative, that $Y=X_{u,a}$ and $Y[k]\ge0$ on $\M$; and, on every representative edge, statement~(2) of Proposition~\ref{prop:computation}, by computing $\det(J_i+tY)$ and $\det Q(J_i+tY)$ by interpolation and counting the roots of $\det(J_i+tY)$ in $(0,t^*)$ with $\det Q<512$, $=512$ and $>512$ by Sturm sequences (Tarski queries). They find the five points $E_0,\dots,E_4$ and no other point with $\det J=0$ and $\det Q\le512$.
+Four independent implementations, in C and C++ with rational arithmetic on multiprecision integers, in Julia and in Python with exact rationals, read the certificate and check, without using the enumeration: that each $J_i$ lies in $\Rk$ and has exactly the listed minimal vectors, by an enumeration of all $k\in\M^*$ with $J_i[k]\le4$ from an exact $LDL^\T$ decomposition; that these have rank $21$; that the listed generators lie in $\Gamma$ and fix $J_i$; that the listed rays are distinct, primitive, lie in $C_{J_i}$ and are extreme (rank $20$); that the generators permute them and that the representatives meet each orbit once, with the stated orbit sizes; for each bounded representative, that $J_i+t^*Y\in\Rk$, that some minimal vector $k$ of $J_i+t^*Y$ has $Y[k]<0$, and that $T^\T J_jT=J_i+t^*Y$ with $T\in\Gamma$; for each unbounded representative, that $Y=X_{u,a}$ and $Y[k]\ge0$ on $\M$; and, on every representative edge, statement~(2) of Proposition~\ref{prop:computation}, by computing $\det(J_i+tY)$ and $\det Q(J_i+tY)$ by interpolation and counting the roots of $\det(J_i+tY)$ in $(0,t^*)$ with $\det Q<512$, $=512$ and $>512$ by Sturm sequences. They find the five points $E_0,\dots,E_4$ and no other point with $\det J=0$ and $\det Q\le512$.
 
 \subsection*{Completeness of the extreme rays}
-The certificate lists all extreme rays of each cone $C_{J_i}$; the programs above check that the listed rays are extreme rays. That the list is complete is checked four times: by \texttt{cddlib} and by \texttt{lrs}~\cite{lrs}, whose outputs agree on all $34$ cones, and by two implementations of the double description method written for this purpose, in C (\texttt{checkers/dd.c}) and in Julia (\texttt{checkers/dd.jl}), which start from a simplicial cone, add the inequalities one at a time, keep exactly the extreme rays by the combinatorial adjacency test of Fukuda and Prodon~\cite{FukudaProdon1996}, and compare their final lists with the certificate.
+The certificate lists all extreme rays of each cone $C_{J_i}$, and the checks above confirm that every listed ray is extreme. That the lists are complete is confirmed four times, by four enumerations of the extreme rays of all $34$ cones whose outputs agree with the certificate: an implementation of the double description method with the adjacency test of Fukuda and Prodon~\cite{FukudaProdon1996}, an implementation of the reverse search method of Avis and Fukuda~\cite{AvisFukuda1992}, and two further implementations of the double description method written independently, in C and in Julia, which start from a simplicial cone, add the inequalities one at a time and keep exactly the extreme rays by the combinatorial adjacency test.
 
-\subsection*{Lean~4}
-The archive contains a Lean~4 project built on Mathlib~\cite{Lean4,mathlib}. Its theorem \texttt{D5.certificate} states, for the $34$ matrices $J_i$ and the $480$ representative edges of the certificate: $J_i\in\Rk$; $\Min(J_i)$ is the listed set up to sign; $\det J_i$ and $\det Q(J_i)$ have the values of Table~\ref{tab:vertices}; along every representative edge, $\det(J_i+tY)>0$ or $\det Q(J_i+tY)\ge512$, with $\det=0$ and $\det Q=512$ only at the listed points; for bounded edges, $t^*>0$, $J_i+t^*Y=T^\T J_jT$ with $T\in\Gamma$, and some $k\in\M^*$ has $(J_i+tY)[k]<4$ for all $t>t^*$; for unbounded edges, $Y[k]\ge0$ for all $k\in\M^*$. Here $\Rk$, $\M^*$, $\Gamma$ and the determinants are the Mathlib notions for real matrices. The proof is checked by the Lean kernel, without \texttt{native\_decide}, and depends only on the axioms \texttt{propext}, \texttt{Classical.choice} and \texttt{Quot.sound}. The rank conditions defining vertices and extreme rays, the completeness of the lists of rays and the orbit decompositions are checked by the programs above, not in Lean.
+\subsection*{The Lean formalization}
+A proof in Lean~4 with Mathlib~\cite{Lean4,mathlib}, in which every step is checked by the kernel with no evaluation by compiled code and which uses only the axioms of propositional extensionality, choice and quotient soundness, proves the following for the $34$ matrices $J_i$ and the $480$ representative edges of the certificate. Each $J_i$ lies in $\Rk$; $\Min(J_i)$ is the listed set up to sign; $\det J_i$ and $\det Q(J_i)$ have the values of Table~\ref{tab:vertices}. Along every representative edge, $\det(J_i+tY)>0$ or $\det Q(J_i+tY)\ge512$, with $\det=0$ and $\det Q=512$ only at the listed points. For a bounded edge, $t^*>0$, $J_i+t^*Y=T^\T J_jT$ with $T\in\Gamma$, and some $k\in\M^*$ has $(J_i+tY)[k]<4$ for all $t>t^*$; for an unbounded edge, $Y[k]\ge0$ for all $k\in\M^*$. Here $\Rk$, $\M^*$, $\Gamma$ and the determinants are the Mathlib notions for real matrices. Three ingredients of Proposition~\ref{prop:computation} are not formalized: the rank conditions that make the $J_i$ vertices and the listed rays extreme, the completeness of the lists of extreme rays, and the orbit decompositions. They rest on the exact computations above. A formal certificate of completeness would have to account for every set of $20$ independent minimal vectors of a vertex with up to $36$ minimal vectors, or for the faces of the many degenerate rays, and we have not produced one.
 
 \subsection*{Equality configurations}
-\texttt{compute/equality.py} recomputes the points of $\cand$ with $\det Q=512$ from the enumeration, and \texttt{compute/classify\_eq.py} classifies, independently of Section~\ref{sec:equality}, all pairs $(Q,c)$ with $Q$ the $Q$-block of such a point and $c$ a deep hole of the lattice of $Q$, using the Voronoi cell of the lattice; it finds the same five classes. \texttt{compute/lattice\_check.py} checks that the three lattice cases are $\sqrt2\,D_5$, and \texttt{compute/configurations.py} checks Lemma~\ref{lem:vectors}, Lemma~\ref{lem:noncongruent} and the statements of Remark~\ref{rem:identify} that concern $P_1$, $P_2$ and the sublattices of $D_5$.
+A separate exact computation recomputes the points of $\cand$ with $\det Q=512$ from the enumeration and classifies, independently of Section~\ref{sec:equality}, all pairs $(Q,c)$ with $Q$ the $Q$-block of such a point and $c$ a deep hole of the lattice of $Q$, using the Voronoi cell of the lattice; it finds the same five classes. Further exact computations check that the three lattice cases are $\sqrt2\,D_5$, and check Lemma~\ref{lem:vectors}, Lemma~\ref{lem:noncongruent} and the statements of Remark~\ref{rem:identify} that concern $P_1$, $P_2$ and the sublattices of $D_5$.
 
 Floating-point numbers are used only to choose enumeration boxes, which are then enlarged; every decision is made in exact arithmetic. The values $512$, $320+128\sqrt6$, $648$ and $768$ of $\det Q$ in Table~\ref{tab:unbounded} correspond to the centre densities $1/(8\sqrt2)$, $(\sqrt3-\sqrt2)/4$, $1/(9\sqrt2)$ and $1/(8\sqrt3)$ found in~\cite[\S4.3]{AK2020}, and the $34$ vertices, the two with $\det J<0$, and the edge on which $\det J\equiv0$ agree with~\cite[\S4.3]{AK2020}.
 
-\section*{Use of AI tools}
-The author used the generative AI tool Claude Code (Anthropic) to develop the proofs, to write the verification programs and the Lean formalization, and to draft this article. The author reviewed the content and takes full responsibility for it.
+\section*{Acknowledgements}
+
+The authors used the generative AI tool Claude (Anthropic), through Claude Code, to assist with the proofs, the Lean formalization, the computations and the preparation of this article. The authors reviewed and edited the content and take full responsibility for it.
 
 \section*{Statements and Declarations}
 
-\subsection*{Funding} No funding was received for conducting this study.
+\subsection*{Competing interests} None.
 
-\subsection*{Competing interests} The author has no competing interests to declare that are relevant to the content of this article.
+\subsection*{Funding} None.
 
-\subsection*{Data and code availability} The programs, the data, the certificate and the Lean project of Appendix~\ref{app:verification} are available at \url{https://github.com/creelie/D5}~\cite{D5archive}, archived on Zenodo under \doi{10.5281/zenodo.23323366} (all versions; release v1.0.0 is \doi{10.5281/zenodo.23323367}).
+\subsection*{Data availability} {\raggedright Deep Bhattacharjee computed the Lean formalization and the Julia, C, C++, shell and Python computations with the help of AI assistance (Claude, Anthropic). The Lean formalization of the finite part of the proof, together with the programs, the data and the certificate of Appendix~\ref{app:verification}, is archived at Zenodo~\cite{D5archive}, doi:\href{https://doi.org/\zenodoID}{\zenodoID}. The paper is available at \url{\preprintURL}.\par}
 
 {\raggedright
 \begin{thebibliography}{99}
@@ -696,20 +724,20 @@ The author used the generative AI tool Claude Code (Anthropic) to develop the pr
 \bibitem{AK2020}
 A.~Andreanov and Y.~Kallus, \emph{Locally optimal 2-periodic sphere packings}, Discrete Comput. Geom. \textbf{63} (2020), 182--208. \doi{10.1007/s00454-019-00150-6}
 
-\bibitem{lrs}
-D.~Avis, \emph{lrslib}, reverse search vertex enumeration program, \url{http://cgm.cs.mcgill.ca/~avis/C/lrs.html}.
+\bibitem{AvisFukuda1992}
+D.~Avis and K.~Fukuda, \emph{A pivoting algorithm for convex hulls and vertex enumeration of arrangements and polyhedra}, Discrete Comput. Geom. \textbf{8} (1992), 295--313. \doi{10.1007/BF02293050}
 
 \bibitem{Bha2026a}
-D.~Bhattacharjee, \emph{Densest packings of two translates of a lattice in four dimensions: paper, code and certificates}, Zenodo, 2026. \doi{10.5281/zenodo.23239767}
+D.~Bhattacharjee and U.~Bhattacharya, \emph{Densest packings of two translates of a lattice in four dimensions}, preprint, 2026, \url{https://github.com/creelie/eD424/blob/main/preprintMusin24CellConjectureTwoTranslates/Musin24CellConjectureTwoTranslates.pdf}; Lean formalization, programs and certificates at Zenodo, \doi{10.5281/zenodo.23387006}
 
 \bibitem{D5archive}
-D.~Bhattacharjee, \emph{Densest packings of two translates of a lattice in five dimensions: paper, code, certificates and Lean formalization}, Zenodo, 2026. \doi{10.5281/zenodo.23323366}; \url{https://github.com/creelie/D5}
+D.~Bhattacharjee and U.~Bhattacharya, \emph{Densest packings of two translates of a lattice in five dimensions: Lean formalization, programs and certificate}, Zenodo, 2026. \doi{\zenodoID}
 
 \bibitem{Cassels1959}
 J.~W.~S. Cassels, \emph{An Introduction to the Geometry of Numbers}, Grundlehren Math. Wiss. 99, Springer, Berlin, 1959. \doi{10.1007/978-3-642-62035-5}
 
 \bibitem{CR2026}
-H.~Cohn and I.~Rajagopal, \emph{Variations on five-dimensional sphere packings}, Discrete Comput. Geom. (2026). \doi{10.1007/s00454-026-00841-x}; arXiv:2412.00937
+H.~Cohn and I.~Rajagopal, \emph{Variations on five-dimensional sphere packings}, Discrete Comput. Geom. \textbf{76} (2026), 1660--1678. \doi{10.1007/s00454-026-00841-x}
 
 \bibitem{CS1995}
 J.~H. Conway and N.~J.~A. Sloane, \emph{What are all the best sphere packings in low dimensions?}, Discrete Comput. Geom. \textbf{13} (1995), 383--403. \doi{10.1007/BF02574051}
@@ -719,9 +747,6 @@ J.~H. Conway and N.~J.~A. Sloane, \emph{Sphere Packings, Lattices and Groups}, 3
 
 \bibitem{FinckePohst1985}
 U.~Fincke and M.~Pohst, \emph{Improved methods for calculating vectors of short length in a lattice, including a complexity analysis}, Math. Comp. \textbf{44} (1985), 463--471. \doi{10.1090/S0025-5718-1985-0777278-8}
-
-\bibitem{cdd}
-K.~Fukuda, \emph{cddlib}, an implementation of the double description method, \url{https://github.com/cddlib/cddlib}.
 
 \bibitem{FukudaProdon1996}
 K.~Fukuda and A.~Prodon, \emph{Double description method revisited}, in: Combinatorics and Computer Science, Lecture Notes in Comput. Sci. 1120, Springer, Berlin, 1996, 91--111. \doi{10.1007/3-540-61576-8_77}
