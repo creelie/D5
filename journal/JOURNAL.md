@@ -42,8 +42,9 @@ MSC 2020: primary 52C17; secondary 11H31, 11H55.
   funding (none) and data availability (who computed what, the Zenodo DOI of
   the Lean formalization and the link to the PDF in `preprintAndreanovKallusTwoPeriodicPackingD5/`), as
   the guidelines require.
-- Supplementary material: the Zenodo record of the repository, cited in the
-  paper.
+- Supplementary material: the Zenodo record of the repository,
+  doi:10.5281/zenodo.23387908 (release v2.0.0; all versions doi:10.5281/zenodo.23323366),
+  cited in the paper.
 
 ## Policy on AI assistance
 
